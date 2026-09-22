@@ -22,7 +22,6 @@ in the components — change the text there and every section updates.
 | --------------- | --------------------------------------------- |
 | `profile`       | Name, role, blurb, socials, résumé link       |
 | `navLinks`      | Navbar + footer links and scroll-spy sections |
-| `stats`         | Animated counters under the hero              |
 | `about`         | About narrative and highlight cards           |
 | `skillGroups`   | Skills grid                                   |
 | `experience`    | Expandable timeline                           |
@@ -34,7 +33,7 @@ in the components — change the text there and every section updates.
 
 ## Two things to finish
 
-1. **Add your résumé PDF.** The "Download CV" button points at `profile.resumeUrl`, currently
+1. **Add your résumé PDF.** The "View Resume" button opens `profile.resumeUrl` in a new tab, currently
    `/Vaishnavi-Gupta-Resume.pdf`. Drop that file into `public/` with exactly that name, or change
    the path in `content.js`.
 2. **Add project links.** Each project has an empty `links: []`. Fill it in to get buttons in the

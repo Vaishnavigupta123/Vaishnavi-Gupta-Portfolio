@@ -13,7 +13,7 @@ function Role({ job, index, open, onToggle }) {
         <span
           className={`h-2.5 w-2.5 rounded-full transition-all duration-500 ${
             job.current
-              ? 'bg-accent shadow-[0_0_14px_rgba(110,231,255,0.9)]'
+              ? 'bg-accent shadow-[0_0_14px_rgba(94,234,212,0.9)]'
               : 'bg-slate-600 group-hover:bg-accent-soft'
           }`}
         />
@@ -58,7 +58,7 @@ function Role({ job, index, open, onToggle }) {
             <ul className="mt-4 flex flex-wrap gap-2">
               {job.tags.map((tag) => (
                 <li key={tag}>
-                  <span className="chip">{tag}</span>
+                  <span className="chip-accent">{tag}</span>
                 </li>
               ))}
             </ul>
@@ -117,7 +117,7 @@ export default function Experience() {
     <section id="experience" className="section">
       <SectionHeading
         eyebrow="Experience"
-        title="Where I have been building"
+        title="Where I have been *building*"
         subtitle="From UI/UX and front-end work to owning clinical modules on a multi-tenant EHR platform. Expand any role for the detail."
       />
 

@@ -18,7 +18,7 @@ export default function Achievements() {
     <section id="achievements" className="section">
       <SectionHeading
         eyebrow="Achievements"
-        title="Certifications, milestones and things I am proud of"
+        title="Certifications, milestones and *things I am proud of*"
         subtitle="A mix of formal credentials and the engineering wins that actually moved the product."
       />
 

@@ -11,7 +11,7 @@ export default function Footer() {
 
   return (
     <footer className="relative border-t border-white/[0.06]">
-      <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
+      <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-8 lg:px-12">
         <div className="flex flex-col items-center justify-between gap-8 sm:flex-row sm:items-start">
           <div>
             <a href="#home" onClick={(e) => go(e, 'home')} className="flex items-center gap-2.5">

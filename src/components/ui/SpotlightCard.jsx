@@ -8,7 +8,7 @@ import { useCallback, useRef, useState } from 'react'
 export default function SpotlightCard({
   children,
   className = '',
-  glow = 'rgba(110,231,255,0.35)',
+  glow = 'rgba(94,234,212,0.35)',
   tilt = false,
   tiltStrength = 6,
   as: Tag = 'div',

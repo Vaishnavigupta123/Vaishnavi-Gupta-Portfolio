@@ -21,20 +21,24 @@ function Marquee({ items, reverse = false }) {
           return (
             <span
               key={`${tech.name}-${i}`}
-              style={{ '--brand': color }}
-              className="group flex shrink-0 items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.035] px-5 py-3 backdrop-blur-md transition-all duration-300 hover:border-[color:var(--brand)]/50 hover:bg-white/[0.08]"
+              style={{
+                '--brand': color,
+                borderColor: `color-mix(in srgb, ${color} 34%, transparent)`,
+                backgroundColor: `color-mix(in srgb, ${color} 11%, transparent)`,
+              }}
+              className="group flex shrink-0 items-center gap-2.5 rounded-xl border px-5 py-3 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_28px_-8px_var(--brand)]"
             >
               <span
                 aria-hidden="true"
-                className="grid h-7 w-7 shrink-0 place-items-center rounded-lg ring-1 ring-inset ring-white/10 transition-transform duration-300 group-hover:scale-110"
-                style={{ backgroundColor: `color-mix(in srgb, ${color} 16%, transparent)` }}
+                className="grid h-7 w-7 shrink-0 place-items-center rounded-lg ring-1 ring-inset ring-white/15 transition-transform duration-300 group-hover:scale-110"
+                style={{ backgroundColor: `color-mix(in srgb, ${color} 26%, transparent)` }}
               >
                 <Icon
                   className="h-4 w-4 transition-[filter] duration-300 group-hover:drop-shadow-[0_0_6px_var(--brand)]"
                   style={{ color }}
                 />
               </span>
-              <span className="whitespace-nowrap text-[13px] font-medium text-slate-300 transition-colors group-hover:text-white">
+              <span className="whitespace-nowrap text-[13px] font-semibold text-slate-200 transition-colors group-hover:text-white">
                 {tech.name}
               </span>
             </span>
@@ -55,7 +59,7 @@ export default function TechStack() {
     <section id="stack" className="section">
       <SectionHeading
         eyebrow="Tech Stack"
-        title="The full toolkit"
+        title="The full *toolkit*"
         subtitle="Everything I use to take a feature from a Figma frame to a deployed, authenticated, cached endpoint."
         align="center"
       />
@@ -69,8 +73,8 @@ export default function TechStack() {
               onClick={() => setGroup(g)}
               className={`rounded-full border px-4 py-1.5 text-[12.5px] font-medium transition-all duration-300 ${
                 group === g
-                  ? 'border-accent/50 bg-accent/10 text-accent'
-                  : 'border-white/10 bg-white/[0.03] text-slate-400 hover:border-white/25 hover:text-white'
+                  ? 'border-transparent bg-gradient-to-r from-accent to-accent-soft text-ink-950 shadow-[0_6px_24px_-8px_rgba(94,234,212,0.8)]'
+                  : 'border-white/10 bg-white/[0.03] text-slate-400 hover:border-accent/40 hover:text-white'
               }`}
             >
               {g}
@@ -80,9 +84,29 @@ export default function TechStack() {
       </Reveal>
 
       <Reveal delay={0.18} direction="none">
-        <div className="space-y-3">
-          <Marquee items={filtered.slice(0, half)} />
-          {filtered.length > 1 && <Marquee items={filtered.slice(half)} reverse />}
+        <div className="relative overflow-hidden rounded-3xl border border-white/[0.07] bg-white/[0.02] px-2 py-7 backdrop-blur-sm">
+          {/* colour band so the row reads as one lit surface */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(120% 90% at 50% 50%, rgba(94,234,212,0.13), rgba(56,189,248,0.09) 42%, transparent 72%)',
+            }}
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent-soft/50 to-transparent"
+          />
+
+          <div className="relative space-y-3">
+            <Marquee items={filtered.slice(0, half)} />
+            {filtered.length > 1 && <Marquee items={filtered.slice(half)} reverse />}
+          </div>
         </div>
       </Reveal>
 

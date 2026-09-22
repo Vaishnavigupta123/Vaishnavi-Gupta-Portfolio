@@ -24,6 +24,10 @@ import { FaAws } from 'react-icons/fa6'
 import { VscVscode } from 'react-icons/vsc'
 import {
   Barcode,
+  Database,
+  Mic,
+  PenTool,
+  Sparkles,
   Binary,
   Blocks,
   Boxes,
@@ -59,13 +63,14 @@ const ICON_MAP = {
   // ---- Backend ----
   Python: { Icon: SiPython, color: '#3776AB' },
   Django: { Icon: SiDjango, color: '#44B78B' },
-  'REST APIs': { Icon: Network, color: '#8b5cf6' },
+  'REST APIs': { Icon: Network, color: '#38bdf8' },
   'JWT Auth': { Icon: SiJsonwebtokens, color: '#FB015B' },
   JWT: { Icon: SiJsonwebtokens, color: '#FB015B' },
   WebSocket: { Icon: SiSocketdotio, color: '#FFFFFF' },
 
   // ---- Database ----
   PostgreSQL: { Icon: SiPostgresql, color: '#4169E1' },
+  SQL: { Icon: Database, color: '#38bdf8' },
   Redis: { Icon: SiRedis, color: '#FF4438' },
   'Schema design': { Icon: Table2, color: '#34d399' },
   'Server-side pagination': { Icon: Rows3, color: '#34d399' },
@@ -85,8 +90,14 @@ const ICON_MAP = {
   GitHub: { Icon: SiGithub, color: '#FFFFFF' },
   'VS Code': { Icon: VscVscode, color: '#007ACC' },
   Figma: { Icon: SiFigma, color: '#F24E1E' },
-  jsPDF: { Icon: FileText, color: '#f472b6' },
-  JsBarcode: { Icon: Barcode, color: '#f472b6' },
+  jsPDF: { Icon: FileText, color: '#a78bfa' },
+  JsBarcode: { Icon: Barcode, color: '#a78bfa' },
+
+  // ---- Project / misc ----
+  'Speech-to-Text': { Icon: Mic, color: '#a78bfa' },
+  'Generative AI': { Icon: Sparkles, color: '#a78bfa' },
+  'UI/UX': { Icon: PenTool, color: '#34d399' },
+  Prototyping: { Icon: PenTool, color: '#34d399' },
 
   // ---- Core Concepts ----
   'Data Structures & Algorithms': { Icon: Binary, color: '#818cf8' },

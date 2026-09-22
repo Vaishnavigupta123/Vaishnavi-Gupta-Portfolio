@@ -5,6 +5,7 @@ import { projectFilters, projects } from '../data/content'
 import SectionHeading from './ui/SectionHeading'
 import Reveal from './ui/Reveal'
 import SpotlightCard from './ui/SpotlightCard'
+import { getSkillIcon } from '../data/skillIcons'
 
 function hexToRgba(hex, alpha) {
   const n = parseInt(hex.replace('#', ''), 16)
@@ -13,6 +14,7 @@ function hexToRgba(hex, alpha) {
 
 function ProjectCard({ project, onOpen }) {
   const glow = hexToRgba(project.accent, 0.3)
+  const { Icon: Logo } = getSkillIcon(project.logo)
 
   return (
     <motion.div
@@ -30,12 +32,30 @@ function ProjectCard({ project, onOpen }) {
         className="flex h-full cursor-pointer flex-col p-6"
         onClick={() => onOpen(project)}
       >
-        {/* accent wash */}
+        {/* glowing logo panel */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-40 blur-3xl transition-opacity duration-500 group-hover:opacity-80"
-          style={{ background: glow }}
-        />
+          className="relative -mx-6 -mt-6 mb-6 h-36 overflow-hidden border-b border-white/[0.06]"
+        >
+          <div
+            className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-100"
+            style={{
+              opacity: 0.75,
+              background: `radial-gradient(circle at 50% 58%, ${hexToRgba(
+                project.accent,
+                0.28
+              )}, transparent 68%)`,
+            }}
+          />
+          <div className="relative grid h-full place-items-center">
+            <span
+              className="grid h-[4.5rem] w-[4.5rem] place-items-center rounded-2xl border border-white/10 bg-ink-950/70 backdrop-blur-sm transition-transform duration-500 group-hover:scale-110"
+              style={{ boxShadow: `0 0 44px -10px ${hexToRgba(project.accent, 0.85)}` }}
+            >
+              <Logo className="h-9 w-9" style={{ color: project.accent }} />
+            </span>
+          </div>
+        </div>
 
         <div className="mb-4 flex items-start justify-between gap-4">
           <div className="flex flex-wrap items-center gap-2">
@@ -231,7 +251,7 @@ export default function Projects() {
     <section id="projects" className="section">
       <SectionHeading
         eyebrow="Projects"
-        title="Things I have designed and shipped"
+        title="Things I have designed and *shipped*"
         subtitle="Clinical platforms, marketing sites and product prototypes. Tap any card for the full breakdown."
       />
 

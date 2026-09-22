@@ -20,12 +20,12 @@ export default function About() {
         <div className="space-y-5">
           {about.paragraphs.map((p, i) => (
             <Reveal key={i} delay={i * 0.1}>
-              <p className="text-[15px] leading-[1.85] text-slate-400">{p}</p>
+              <p className="max-w-[68ch] text-[15px] leading-[1.85] text-slate-400">{p}</p>
             </Reveal>
           ))}
 
           <Reveal delay={0.3}>
-            <SpotlightCard className="mt-8 p-6" glow="rgba(139,92,246,0.28)">
+            <SpotlightCard className="mt-8 p-6" glow="rgba(56,189,248,0.28)">
               <div className="flex items-start gap-4">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/5 text-accent-soft">
                   <GraduationCap className="h-5 w-5" />

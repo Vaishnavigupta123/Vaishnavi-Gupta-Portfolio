@@ -21,6 +21,7 @@ export const profile = {
     'Full Stack Developer shipping an ABDM-compliant Electronic Health Record platform as a multi-tenant SaaS — from IPD dashboards and CPOE order management to real-time vitals over WebSocket. I work across React, Next.js, Python and Django, and care about the details that make clinical software fast and dependable.',
   email: 'vaishnavigupta724@gmail.com',
   phone: '+91 7667719181',
+  photo: '/vaishnavi.jpg',
   resumeUrl: '/Vaishnavi-Gupta-Resume.pdf',
   socials: [
     {
@@ -61,15 +62,8 @@ export const navLinks = [
   { id: 'contact', label: 'Contact' },
 ]
 
-export const stats = [
-  { value: 8, suffix: '+', label: 'EHR modules shipped' },
-  { value: 15, suffix: '+', label: 'Technologies in daily use' },
-  { value: 3, suffix: '', label: 'Product teams shipped with' },
-  { value: 100, suffix: '%', label: 'Ownership, end to end' },
-]
-
 export const about = {
-  heading: 'Engineering for the people on the other side of the screen',
+  heading: 'Engineering for the people on the other side of the *screen*',
   paragraphs: [
     'I am a Full Stack Developer at HlthTek Optimus, where I build an ABDM-compliant Electronic Health Record platform delivered as a multi-tenant SaaS for hospitals. Multi-tenancy means one codebase serving many hospitals at once — so every decision about state, caching and access control has to hold up under real clinical load.',
     'My day to day spans the IPD Doctor’s Dashboard, CPOE order management, and Lab & Radiology workflows — server-side pagination, debounced search, WebSocket vitals streaming, barcode sample labelling, PDF requisitions. On the backend side I work with Python, Django and PostgreSQL, design REST APIs, and deploy on AWS with Docker and CI/CD.',
@@ -101,25 +95,22 @@ export const about = {
 
 export const skillGroups = [
   {
+    title: 'Languages',
+    icon: 'braces',
+    glow: 'rgba(250,204,21,0.30)',
+    skills: ['JavaScript (ES6+)', 'Python', 'SQL', 'HTML5', 'CSS3'],
+  },
+  {
     title: 'Frontend',
     icon: 'monitor',
-    glow: 'rgba(110,231,255,0.35)',
-    skills: [
-      'React.js',
-      'Next.js',
-      'JavaScript (ES6+)',
-      'MUI v5',
-      'Redux',
-      'React Router v5',
-      'HTML5',
-      'CSS3',
-    ],
+    glow: 'rgba(94,234,212,0.35)',
+    skills: ['React.js', 'Next.js', 'Redux', 'MUI v5', 'React Router v5'],
   },
   {
     title: 'Backend',
     icon: 'server',
-    glow: 'rgba(139,92,246,0.35)',
-    skills: ['Python', 'Django', 'REST APIs', 'JWT Auth', 'WebSocket'],
+    glow: 'rgba(56,189,248,0.32)',
+    skills: ['Django', 'REST APIs', 'JWT Auth', 'WebSocket'],
   },
   {
     title: 'Database',
@@ -136,13 +127,14 @@ export const skillGroups = [
   {
     title: 'Tools',
     icon: 'wrench',
-    glow: 'rgba(244,114,182,0.32)',
+    glow: 'rgba(167,139,250,0.32)',
     skills: ['Postman', 'GitHub', 'VS Code', 'Figma', 'jsPDF', 'JsBarcode'],
   },
   {
     title: 'Core Concepts',
     icon: 'brain',
     glow: 'rgba(129,140,248,0.35)',
+    wide: true,
     skills: ['Data Structures & Algorithms', 'OOPs', 'System Design', 'Multi-tenant architecture'],
   },
 ]
@@ -230,7 +222,8 @@ export const projects = [
     tech: ['React 17', 'MUI v5', 'Redux', 'WebSocket', 'Django', 'PostgreSQL', 'Redis', 'AWS'],
     links: [],
     note: 'Proprietary — source not public',
-    accent: '#6ee7ff',
+    logo: 'React',
+    accent: '#5eead4',
   },
   {
     title: 'HlthTek’s Website',
@@ -248,7 +241,8 @@ export const projects = [
     ],
     tech: ['Next.js', 'JavaScript', 'SSR/SSG', 'SEO', 'REST APIs'],
     links: [],
-    accent: '#8b5cf6',
+    logo: 'Next.js',
+    accent: '#38bdf8',
   },
   {
     title: 'Voice Writer',
@@ -266,7 +260,8 @@ export const projects = [
     ],
     tech: ['JavaScript', 'Generative AI', 'Speech-to-Text', 'React'],
     links: [],
-    accent: '#f472b6',
+    logo: 'Speech-to-Text',
+    accent: '#a78bfa',
   },
   {
     title: 'Agri-Tech',
@@ -283,6 +278,7 @@ export const projects = [
     ],
     tech: ['Figma', 'UI/UX', 'Prototyping', 'User flows'],
     links: [],
+    logo: 'Figma',
     accent: '#34d399',
   },
   {
@@ -300,6 +296,7 @@ export const projects = [
     ],
     tech: ['Figma', 'UI/UX', 'Accessibility', 'Prototyping'],
     links: [],
+    logo: 'Figma',
     accent: '#fbbf24',
   },
 ]
@@ -386,7 +383,7 @@ export const achievements = [
 ]
 
 export const contact = {
-  heading: 'Let’s build something',
+  heading: 'Let’s build *something*',
   subheading:
     'I am open to Full Stack and Frontend roles, and always happy to talk about healthcare tech, React architecture, or whatever you are building.',
   items: [

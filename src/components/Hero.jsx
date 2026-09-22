@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   ArrowDown,
   ArrowUpRight,
   Code2,
-  Download,
+  FileText,
   Github,
   Linkedin,
   Mail,
   MapPin,
 } from 'lucide-react'
-import { profile, stats } from '../data/content'
-import useCountUp from '../hooks/useCountUp'
+import { profile } from '../data/content'
+import Starfield from './ui/Starfield'
+import ResumeModal from './ResumeModal'
 
 const ICONS = { github: Github, linkedin: Linkedin, code: Code2, mail: Mail }
 
@@ -47,21 +48,9 @@ function useTypewriter(words, { type = 70, back = 38, hold = 1900 } = {}) {
   return text
 }
 
-function Stat({ value, suffix, label }) {
-  const [count, ref] = useCountUp(value)
-  return (
-    <div ref={ref}>
-      <div className="font-display text-2xl font-bold text-white sm:text-3xl">
-        {count}
-        <span className="text-gradient-accent">{suffix}</span>
-      </div>
-      <div className="mt-1 text-[11px] uppercase tracking-[0.14em] text-slate-500">{label}</div>
-    </div>
-  )
-}
-
 export default function Hero() {
   const typed = useTypewriter(profile.roles)
+  const [resumeOpen, setResumeOpen] = useState(false)
 
   const go = (e, id) => {
     e.preventDefault()
@@ -71,9 +60,21 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[100svh] items-center overflow-hidden px-5 pb-20 pt-32 sm:px-8"
+      className="relative flex min-h-[100svh] items-center overflow-hidden px-5 pb-20 pt-32 sm:px-8 lg:px-12"
     >
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-14 lg:grid-cols-[1.15fr_0.85fr]">
+      {/* starfield lives only behind the hero, fading out at the bottom */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          maskImage: 'linear-gradient(to bottom, #000 55%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, #000 55%, transparent 100%)',
+        }}
+      >
+        <Starfield />
+      </div>
+
+      <div className="relative z-10 mx-auto grid w-full max-w-[1400px] items-center gap-14 lg:grid-cols-[1.15fr_0.85fr]">
         {/* ---------------- Left ---------------- */}
         <div>
           <motion.div
@@ -101,10 +102,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 26 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-7 font-display text-[2.6rem] font-extrabold leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-[4.2rem]"
+            className="mt-7 font-display text-[2.2rem] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-5xl lg:text-[3.4rem] xl:text-[4rem]"
           >
-            <span className="text-gradient">{profile.firstName}</span>
-            <br />
+            <span className="text-gradient">{profile.firstName}</span>{' '}
             <span className="text-gradient-accent">{profile.lastName}</span>
           </motion.h1>
 
@@ -128,7 +128,7 @@ export default function Hero() {
             {profile.blurb}
           </motion.p>
 
-          {/* CTAs */}
+          {/* CTAs + socials */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -139,138 +139,86 @@ export default function Hero() {
               View my work
               <ArrowUpRight className="h-4 w-4" />
             </a>
-            <a href={profile.resumeUrl} download className="btn-ghost">
-              <Download className="h-4 w-4" />
-              Download CV
-            </a>
-          </motion.div>
+            <button type="button" onClick={() => setResumeOpen(true)} className="btn-ghost">
+              <FileText className="h-4 w-4" />
+              View Resume
+            </button>
 
-          {/* Socials */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.52 }}
-            className="mt-10 flex items-center gap-3"
-          >
-            {profile.socials.map(({ label, url, icon }) => {
-              const Icon = ICONS[icon] ?? Code2
-              return (
-                <a
-                  key={label}
-                  href={url}
-                  target={url.startsWith('http') ? '_blank' : undefined}
-                  rel="noreferrer noopener"
-                  aria-label={label}
-                  className="group grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/[0.035] text-slate-400 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:text-accent hover:shadow-glow"
-                >
-                  <Icon className="h-[18px] w-[18px]" />
-                </a>
-              )
-            })}
+            <span aria-hidden="true" className="mx-1 hidden h-8 w-px bg-white/10 sm:block" />
+
+            <div className="flex items-center gap-2">
+              {profile.socials.map(({ label, url, icon }) => {
+                const Icon = ICONS[icon] ?? Code2
+                return (
+                  <a
+                    key={label}
+                    href={url}
+                    target={url.startsWith('http') ? '_blank' : undefined}
+                    rel="noreferrer noopener"
+                    aria-label={label}
+                    className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/[0.035] text-slate-400 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:text-accent hover:shadow-glow"
+                  >
+                    <Icon className="h-[18px] w-[18px]" />
+                  </a>
+                )
+              })}
+            </div>
           </motion.div>
         </div>
 
-        {/* ---------------- Right: code card ---------------- */}
+        {/* ---------------- Right: portrait ---------------- */}
         <motion.div
           initial={{ opacity: 0, scale: 0.94, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="relative hidden lg:block"
+          className="relative mx-auto w-full max-w-[17rem] sm:max-w-[19rem] lg:mx-0 lg:ml-auto lg:max-w-[23rem]"
         >
-          <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-tr from-accent/20 via-accent-soft/10 to-transparent blur-3xl" />
+          {/* glow behind the frame */}
+          <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-tr from-accent/25 via-accent-soft/15 to-transparent blur-3xl" />
 
-          <div className="relative animate-float rounded-2xl glass-strong p-1">
-            {/* window chrome */}
-            <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-              <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
-              <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-              <span className="ml-3 font-mono text-[11px] text-slate-500">developer.js</span>
-            </div>
+          {/* offset accent frame */}
+          <div className="absolute inset-0 translate-x-2.5 translate-y-2.5 rounded-[1.75rem] border border-accent/30 sm:translate-x-3 sm:translate-y-3" />
 
-            <pre className="overflow-x-auto p-5 font-mono text-[12.5px] leading-relaxed">
-              <code>
-                <span className="text-violet-400">const</span>{' '}
-                <span className="text-accent">vaishnavi</span>{' '}
-                <span className="text-slate-500">=</span> <span className="text-slate-300">{'{'}</span>
-                {'\n'}
-                <span className="text-slate-500">{'  '}role</span>
-                <span className="text-slate-500">:</span>{' '}
-                <span className="text-emerald-300">&apos;Full Stack Developer&apos;</span>
-                <span className="text-slate-500">,</span>
-                {'\n'}
-                <span className="text-slate-500">{'  '}building</span>
-                <span className="text-slate-500">:</span>{' '}
-                <span className="text-emerald-300">&apos;ABDM-compliant EHR&apos;</span>
-                <span className="text-slate-500">,</span>
-                {'\n'}
-                <span className="text-slate-500">{'  '}stack</span>
-                <span className="text-slate-500">: [</span>
-                {'\n'}
-                <span className="text-emerald-300">{'    '}&apos;React&apos;</span>
-                <span className="text-slate-500">,</span>{' '}
-                <span className="text-emerald-300">&apos;Next.js&apos;</span>
-                <span className="text-slate-500">,</span>
-                {'\n'}
-                <span className="text-emerald-300">{'    '}&apos;Python&apos;</span>
-                <span className="text-slate-500">,</span>{' '}
-                <span className="text-emerald-300">&apos;Django&apos;</span>
-                <span className="text-slate-500">,</span>
-                {'\n'}
-                <span className="text-emerald-300">{'    '}&apos;PostgreSQL&apos;</span>
-                <span className="text-slate-500">,</span>{' '}
-                <span className="text-emerald-300">&apos;AWS&apos;</span>
-                <span className="text-slate-500">,</span>
-                {'\n'}
-                <span className="text-slate-500">{'  '}],</span>
-                {'\n'}
-                <span className="text-slate-500">{'  '}focus</span>
-                <span className="text-slate-500">:</span>{' '}
-                <span className="text-emerald-300">&apos;multi-tenant SaaS&apos;</span>
-                <span className="text-slate-500">,</span>
-                {'\n'}
-                <span className="text-slate-500">{'  '}available</span>
-                <span className="text-slate-500">:</span>{' '}
-                <span className="text-amber-300">true</span>
-                <span className="text-slate-500">,</span>
-                {'\n'}
-                <span className="text-slate-300">{'}'}</span>
-                <span className="ml-1 inline-block h-3.5 w-[7px] animate-blink bg-accent align-middle" />
-              </code>
-            </pre>
+          <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-ink-900 shadow-glow-lg">
+            <img
+              src={profile.photo}
+              alt={`${profile.name}, ${profile.role}`}
+              width="1125"
+              height="1440"
+              loading="eager"
+              className="aspect-[1/1.08] w-full object-cover object-top grayscale-[0.15] transition-all duration-700 hover:grayscale-0 hover:scale-[1.03]"
+            />
+
+            {/* tint + bottom fade so the badge stays readable */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/15 to-transparent"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 mix-blend-soft-light"
+              style={{
+                background:
+                  'linear-gradient(140deg, rgba(94,234,212,0.35), transparent 45%, rgba(167,139,250,0.3))',
+              }}
+            />
+
+            {/* availability badge */}
+            {profile.available && (
+              <div className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-ink-950/75 px-2.5 py-1 backdrop-blur-md">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-slate-200">
+                  Available
+                </span>
+              </div>
+            )}
           </div>
 
-          {/* floating badges */}
-          <motion.div
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute -right-6 top-16 rounded-xl glass px-3.5 py-2 font-mono text-[11px] text-accent"
-          >
-            WebSocket · live vitals
-          </motion.div>
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-            className="absolute -left-8 bottom-14 rounded-xl glass px-3.5 py-2 font-mono text-[11px] text-accent-warm"
-          >
-            multi-tenant · ABDM
-          </motion.div>
         </motion.div>
       </div>
-
-      {/* ---------------- Stats strip ---------------- */}
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.7 }}
-        className="absolute inset-x-0 bottom-0 hidden border-t border-white/[0.06] md:block"
-      >
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-8 py-7">
-          {stats.map((s) => (
-            <Stat key={s.label} {...s} />
-          ))}
-        </div>
-      </motion.div>
 
       {/* scroll cue */}
       <motion.a
@@ -279,10 +227,14 @@ export default function Hero() {
         aria-label="Scroll to about"
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-[7.5rem] left-1/2 hidden -translate-x-1/2 text-slate-600 transition-colors hover:text-accent lg:block"
+        className="absolute bottom-10 left-1/2 z-10 hidden -translate-x-1/2 text-slate-600 transition-colors hover:text-accent lg:block"
       >
         <ArrowDown className="h-5 w-5" />
       </motion.a>
+
+      <AnimatePresence>
+        {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
+      </AnimatePresence>
     </section>
   )
 }

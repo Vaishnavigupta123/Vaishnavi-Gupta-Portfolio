@@ -62,22 +62,22 @@ export default function Navbar() {
           }`}
         />
 
-        <nav className="relative mx-auto flex w-full max-w-6xl items-center justify-between px-5 sm:px-8">
-          {/* Logo */}
+        <nav className="relative mx-auto flex w-full max-w-[1400px] items-center justify-between px-5 sm:px-8 lg:px-12">
+          {/* Logo mark only */}
           <a
             href="#home"
             onClick={(e) => go(e, 'home')}
-            className="group relative flex items-center gap-2.5"
+            aria-label={`${profile.name} — back to top`}
+            className="group relative"
           >
-            <span className="relative grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 font-display text-sm font-bold text-transparent backdrop-blur-md">
+            <span className="relative grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 font-display text-[15px] font-bold text-transparent backdrop-blur-md transition-colors duration-300 group-hover:border-accent/50">
               <span className="bg-gradient-to-br from-accent to-accent-soft bg-clip-text">VG</span>
               <span className="absolute inset-0 rounded-xl opacity-0 shadow-glow transition-opacity duration-500 group-hover:opacity-100" />
             </span>
-            <span className="hidden text-sm font-semibold tracking-tight text-slate-200 sm:block">
-              {profile.name}
-            </span>
           </a>
 
+          {/* Links + CTA, all grouped on the right */}
+          <div className="flex items-center gap-2 sm:gap-4">
           {/* Desktop links */}
           <div
             className="hidden items-center gap-1 rounded-full px-2 py-1.5 lg:flex"
@@ -106,8 +106,6 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* CTA + burger */}
-          <div className="flex items-center gap-3">
             <a
               href="#contact"
               onClick={(e) => go(e, 'contact')}

@@ -1,4 +1,4 @@
-import { Brain, Cloud, Database, Monitor, Server, Wrench } from 'lucide-react'
+import { Braces, Brain, Cloud, Database, Monitor, Server, Wrench } from 'lucide-react'
 import { skillGroups } from '../data/content'
 import SectionHeading from './ui/SectionHeading'
 import { RevealGroup, RevealItem } from './ui/Reveal'
@@ -12,6 +12,7 @@ const ICONS = {
   cloud: Cloud,
   wrench: Wrench,
   brain: Brain,
+  braces: Braces,
 }
 
 export default function Skills() {
@@ -19,16 +20,19 @@ export default function Skills() {
     <section id="skills" className="section">
       <SectionHeading
         eyebrow="Skills"
-        title="What I work with, and what I reach for first"
+        title="What I work with, and what I *reach for first*"
         subtitle="Grouped by where they sit in the stack — from the interface a clinician touches down to the infrastructure it runs on."
       />
 
-      <RevealGroup className="grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.07}>
+      <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.07}>
         {skillGroups.map((group) => {
           const Icon = ICONS[group.icon] ?? Monitor
           return (
-            <RevealItem key={group.title}>
-              <SpotlightCard className="p-5" glow={group.glow} tilt tiltStrength={4}>
+            <RevealItem
+              key={group.title}
+              className={group.wide ? 'sm:col-span-2 lg:col-span-3' : ''}
+            >
+              <SpotlightCard className="h-full p-5" glow={group.glow} tilt tiltStrength={4}>
                 <div className="mb-4 flex items-center gap-3">
                   <span
                     className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-white transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"

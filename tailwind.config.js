@@ -5,16 +5,16 @@ export default {
     extend: {
       colors: {
         ink: {
-          950: '#05060a',
-          900: '#0a0c14',
-          800: '#10131f',
-          700: '#171b2b',
-          600: '#222738',
+          950: '#020308',
+          900: '#05070d',
+          800: '#0b0e18',
+          700: '#131725',
+          600: '#1d2231',
         },
         accent: {
-          DEFAULT: '#6ee7ff',
-          soft: '#8b5cf6',
-          warm: '#f472b6',
+          DEFAULT: '#5eead4',
+          soft: '#38bdf8',
+          warm: '#a78bfa',
         },
       },
       fontFamily: {
@@ -24,8 +24,8 @@ export default {
       },
       boxShadow: {
         glass: '0 8px 32px 0 rgba(0, 0, 0, 0.45)',
-        glow: '0 0 40px -10px rgba(110, 231, 255, 0.55)',
-        'glow-lg': '0 0 80px -20px rgba(139, 92, 246, 0.6)',
+        glow: '0 0 40px -10px rgba(94, 234, 212, 0.55)',
+        'glow-lg': '0 0 80px -20px rgba(56, 189, 248, 0.6)',
       },
       backgroundImage: {
         'grid-fade':

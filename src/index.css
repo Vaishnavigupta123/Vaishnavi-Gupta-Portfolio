@@ -5,9 +5,9 @@
 @layer base {
   :root {
     --bg: 5 6 10;
-    --accent: 110 231 255;
-    --accent-soft: 139 92 246;
-    --accent-warm: 244 114 182;
+    --accent: 94 234 212;
+    --accent-soft: 56 189 248;
+    --accent-warm: 167 139 250;
   }
 
   * {
@@ -25,7 +25,7 @@
   }
 
   ::selection {
-    background: rgba(110, 231, 255, 0.28);
+    background: rgba(94, 234, 212, 0.26);
     color: #f8fafc;
   }
 
@@ -34,15 +34,15 @@
     width: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: #05060a;
+    background: #020308;
   }
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #6ee7ff, #8b5cf6);
+    background: linear-gradient(180deg, #5eead4, #38bdf8);
     border-radius: 9999px;
-    border: 3px solid #05060a;
+    border: 3px solid #020308;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #8b5cf6, #f472b6);
+    background: linear-gradient(180deg, #38bdf8, #a78bfa);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -86,7 +86,7 @@
 
   /* ---------- Section frame ---------- */
   .section {
-    @apply relative mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 md:py-32;
+    @apply relative mx-auto w-full max-w-[1400px] px-5 py-24 sm:px-8 md:py-32 lg:px-12;
   }
 
   /* ---------- Chips / pills ---------- */
@@ -94,6 +94,22 @@
     @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5
            px-3 py-1 text-[11px] font-medium tracking-wide text-slate-300
            transition-colors duration-300 hover:border-accent/40 hover:text-white;
+  }
+
+  /* Cyan tech tags — distinct from the teal accent used elsewhere. */
+  .chip-accent {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px]
+           font-medium tracking-wide transition-all duration-300
+           hover:-translate-y-0.5 hover:text-white;
+    color: #22d3ee;
+    border-color: rgba(34, 211, 238, 0.36);
+    background-color: rgba(34, 211, 238, 0.12);
+  }
+
+  .chip-accent:hover {
+    border-color: rgba(34, 211, 238, 0.7);
+    background-color: rgba(34, 211, 238, 0.22);
+    box-shadow: 0 4px 16px -6px rgba(34, 211, 238, 0.75);
   }
 
   .eyebrow {
@@ -112,12 +128,12 @@
 
   .btn-primary {
     @apply btn text-ink-950;
-    background: linear-gradient(120deg, #6ee7ff, #8b5cf6 55%, #f472b6);
+    background: linear-gradient(120deg, #5eead4, #38bdf8 55%, #a78bfa);
     background-size: 200% 200%;
   }
   .btn-primary:hover {
     background-position: 100% 50%;
-    box-shadow: 0 0 40px -8px rgba(110, 231, 255, 0.65);
+    box-shadow: 0 0 40px -8px rgba(94, 234, 212, 0.6);
     transform: translateY(-2px);
   }
 
@@ -142,8 +158,8 @@
     border-radius: inherit;
     background: linear-gradient(
       135deg,
-      rgba(110, 231, 255, 0.55),
-      rgba(139, 92, 246, 0.25) 40%,
+      rgba(94, 234, 212, 0.55),
+      rgba(56, 189, 248, 0.25) 40%,
       transparent 70%
     );
     -webkit-mask:

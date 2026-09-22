@@ -139,7 +139,7 @@ export default function Contact() {
 
         {/* ---- Form ---- */}
         <Reveal delay={0.12} direction="left">
-          <SpotlightCard className="p-7 sm:p-8" glow="rgba(139,92,246,0.25)">
+          <SpotlightCard className="p-7 sm:p-8" glow="rgba(56,189,248,0.25)">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field label="Name" id="name" value={form.name} onChange={set('name')} required />
